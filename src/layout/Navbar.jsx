@@ -8,6 +8,10 @@ export default function Navbar() {
     <header id="navbar">
       <NavLink id="brand" to="/">
         <p>Frontend Template</p>
+        <NavLink to="/account">Account</NavLink>
+        <NavLink to="/teachers">Teachers</NavLink>
+        <NavLink to="/classes">Classes</NavLink>
+        <NavLink to="/register">Register</NavLink>
       </NavLink>
       <nav>
         {token ? (
