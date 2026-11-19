@@ -1,26 +1,34 @@
-import { useEffect, ueeState, useState } from "react";
-import { getTeachers } from ".../api/teachers";
-import { useAuth } from "../auth/AuthContext";
+import { useEffect, useState } from "react";
+
+import { getTeachers } from "../api/teachers";
 
 export default function TeachersPage() {
-  const { token } = useAuth();
-
   const [teachers, setTeachers] = useState([]);
 
-  const syncTeachers = async () => {
-    const data = await getTeachers();
-    setTeachers(data);
-  };
-
   useEffect(() => {
-    syncTeachers();
+    getTeachers().then(setTeachers);
   }, []);
 
   return (
     <>
       <h1>Teachers</h1>
-      <TeachersPage teachers={teachers} />
-      {token && <TeachersPage syncTeachers={syncTeachers} />}
+      <TeacherList teachers={teachers} />
     </>
+  );
+}
+
+function TeacherList({ teachers }) {
+  if (teachers.length === 0) return <p>No teachers available.</p>;
+
+  return (
+    <ul>
+      {teachers.map((teacher) => (
+        <li key={teacher.id}>
+          <h2>{teacher.teacher_name}</h2>
+          <p>{teacher.dance_style}</p>
+          <p>{teacher.bio}</p>
+        </li>
+      ))}
+    </ul>
   );
 }

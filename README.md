@@ -1,10 +1,19 @@
-# Frontend Template
+# Dance Studio Frontend
 
-You can use this repository as a template for your frontend. It provides a very simple
-React Router layout with a navbar and an `AuthContext` with login and register pages.
+React + Vite frontend for the Dance Studio capstone app.
 
-## Usage
+## Setup
 
-1. Change the name of the package in `package.json`.
-2. Update the environment variables in `example.env` and rename the file to `.env`.
-3. Build components and add routes to them in `App.jsx`.
+1. Install dependencies: `npm install`
+2. Create a `.env` file with:
+   ```
+   VITE_API=http://localhost:3000
+   ```
+3. Start the dev server: `npm run dev`
+
+## Structure
+
+- `src/api` – functions that talk to the backend
+- `src/auth` – login, register, and the auth context
+- `src/layout` – shared page layout and navbar
+- `src/accountPage` – classes, teachers, and account pages

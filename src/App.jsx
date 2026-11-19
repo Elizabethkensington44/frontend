@@ -1,13 +1,20 @@
 import { Route, Routes } from "react-router";
-import Layout from "./layout/Layout";
+
+import AccountPage from "./accountPage/account";
+import ClassesPage from "./accountPage/classes";
+import TeachersPage from "./accountPage/teachers";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import Layout from "./layout/Layout";
 
 export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<p>Home page</p>} />
+        <Route index element={<p>Welcome to the dance studio.</p>} />
+        <Route path="/classes" element={<ClassesPage />} />
+        <Route path="/teachers" element={<TeachersPage />} />
+        <Route path="/account" element={<AccountPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Route>

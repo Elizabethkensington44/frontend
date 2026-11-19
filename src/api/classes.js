@@ -1,44 +1,39 @@
-const API = import.meta.env.VITE_API;
+import { API, handleResponse } from "./client";
 
 export async function getClasses() {
   try {
-    const response = await fetch(API + "/classes");
-    const result = await response.json();
-    return result;
+    return await handleResponse(await fetch(`${API}/classes`));
   } catch (e) {
     console.error(e);
     return [];
   }
 }
 
-export async function getClasses(id) {
-    try {
-        const response = await fetch(API + "/classes/" + id);
-        const result = await response.json();
-        return result;
-
-    } catch (e) {
-        console.error(e);
-        return null;
-    }
+export async function getClassById(id) {
+  try {
+    return await handleResponse(await fetch(`${API}/classes/${id}`));
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 }
 
-const async function createReservation(token, classes) {
-    if (!token) {
-        throw Error("you must be authorized to reserve a class");
-    }
+export async function createReservation(token, classId) {
+  if (!token) throw Error("You must be logged in to reserve a class.");
 
-    const response = await fetch(API + "/classes", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: " Bearer " + token,
-        },
-        body: JSON.stringify(classes),
-    });
+  const response = await fetch(`${API}/classes/${classId}/reservations`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
-    if (!response.ok) {
-        const result = await response.json
-        throw Error(result.message);
-    }
+  if (response.status === 400) {
+    const detail = await response.text();
+    throw Error(
+      detail.includes("already exists")
+        ? "You have already reserved this class."
+        : detail,
+    );
+  }
+
+  return handleResponse(response);
 }

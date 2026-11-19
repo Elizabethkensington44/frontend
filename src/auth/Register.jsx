@@ -27,7 +27,7 @@ export default function Register() {
       <form action={onRegister}>
         <label>
           Username
-          <input type="text" name="username" />
+          <input type="text" name="username" required />
         </label>
         <label>
           Password

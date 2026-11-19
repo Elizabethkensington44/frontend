@@ -1,21 +1,17 @@
-const API = import.meta.env.VITE_API;
+import { API, handleResponse } from "./client";
 
 export async function getTeachers() {
   try {
-    const response = await fetch(API + "/teachers");
-    const result = await response.json();
-    return result;
+    return await handleResponse(await fetch(`${API}/teachers`));
   } catch (e) {
     console.error(e);
     return [];
   }
 }
 
-export async function getTeachers(id) {
+export async function getTeacherById(id) {
   try {
-    const response = await fetch(API + "/teachers/" + id);
-    const result = await response.json();
-    return result;
+    return await handleResponse(await fetch(`${API}/teachers/${id}`));
   } catch (e) {
     console.error(e);
     return null;
