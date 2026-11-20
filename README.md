@@ -17,3 +17,5 @@ React + Vite frontend for the Dance Studio capstone app.
 - `src/auth` – login, register, and the auth context
 - `src/layout` – shared page layout and navbar
 - `src/accountPage` – classes, teachers, and account pages
+
+please work in the deployument
